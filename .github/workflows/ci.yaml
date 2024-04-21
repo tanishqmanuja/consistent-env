@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Git User
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - name: Set NPM Config
+        run: npm config set //registry.npmjs.org/:_authToken "${NPM_TOKEN}"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Build (Types)
+        run: bun run build:types
+
+      - name: Publish
+        run: npm publish
