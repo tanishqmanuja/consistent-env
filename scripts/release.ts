@@ -12,5 +12,5 @@ if (!["patch", "minor", "major"].includes(bump)) {
   process.exit(1);
 }
 
-await $`npm version ${bump} -m "🔖 chore: release %s"`;
+await $`npm version ${bump} -m "${{ raw: "🔖" }} chore: release %s"`;
 await $`git push --follow-tags`;
