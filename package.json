@@ -37,5 +37,8 @@
     ".env",
     "environment",
     "variables"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^20.12.7"
+  }
 }
