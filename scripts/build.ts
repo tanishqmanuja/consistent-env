@@ -9,4 +9,5 @@ await Bun.build({
   splitting: true,
   external: ["dotenv"],
   target: "node",
+  minify: true,
 });
