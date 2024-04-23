@@ -1,3 +1,4 @@
+import process from "process";
 import * as dotenv from "dotenv";
 
 /**
