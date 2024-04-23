@@ -24,7 +24,7 @@ Environment variables are loaded in the following order:
 - .env.{mode} (mode is NODE_ENV lowercased, default is development)
 - .env.local
 
-> strategy is a mix of https://bun.sh/docs/runtime/env, https://vitejs.dev/guide/env-and-mode
+Strategy is a mix of (bun)[https://bun.sh/docs/runtime/env], (vite)[https://vitejs.dev/guide/env-and-mode]
 
 > [!NOTE]  
 > Difference from Bun's strategy - bun only supports .env.{mode} when mode is production, development or test.
