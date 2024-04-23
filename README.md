@@ -1,6 +1,6 @@
 # @tqman/env
 
-A thin wrapper around [dotenv](https://github.com/motdotla/dotenv) for providing consistent experience with loading environment variables across different runtimes.
+A thin wrapper around [**dotenv**](https://github.com/motdotla/dotenv) for providing consistent experience with loading environment variables across different runtimes.
 
 ## 📦 Install
 
@@ -24,7 +24,7 @@ Environment variables are loaded in the following order:
 - .env.{mode} (mode is NODE_ENV lowercased, default is development)
 - .env.local
 
-Strategy is a mix of (bun)[https://bun.sh/docs/runtime/env], (vite)[https://vitejs.dev/guide/env-and-mode]
+Strategy is a mix of both [**bun**](https://bun.sh/docs/runtime/env), [**vite**](https://vitejs.dev/guide/env-and-mode).
 
 > [!NOTE]  
 > Difference from Bun's strategy - bun only supports .env.{mode} when mode is production, development or test.
