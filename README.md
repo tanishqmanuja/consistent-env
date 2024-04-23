@@ -21,44 +21,30 @@ bun install dotenv@latest @tqman/env@latest
 Environment variables are loaded in the following order:
 
 - .env
-- .env.production, .env.development, .env.test (depending on NODE_ENV, default is development)
+- .env.{mode} (mode is NODE_ENV lowercased, default is development)
 - .env.local
 
-> strategy replicated from: https://bun.sh/docs/runtime/env
+> strategy is a mix of https://bun.sh/docs/runtime/env, https://vitejs.dev/guide/env-and-mode
+
+> [!NOTE]  
+> Difference from Bun's strategy - bun only supports .env.{mode} when mode is production, development or test.
+> Issue: https://github.com/oven-sh/bun/issues/9090
+
+> [!NOTE]  
+> Difference from Vite's strategy - .env.{mode}.local is loaded by default in vite, but not by this library.
 
 ## 👨‍💻 Usage
 
-0. As a side effect import
+As a side effect import
 
 ```ts
 import "@tqman/env/load";
 ```
 
-1. Simple usage
+As a function call
 
 ```ts
 import { load } from "@tqman/env";
 
 load();
-```
-
-2. Custom strategy (without defaults, i.e. overwrites config)
-
-```ts
-import { load } from "@tqman/env";
-
-load({
-  staging: ".env.staging",
-}); // laoding of .env and .env.local will not be affected by config
-```
-
-3. Custom strategy (with defaults, i.e. extends config)
-
-```ts
-import { load } from "@tqman/env";
-
-load((config) => ({
-  ...config,
-  staging: ".env.staging",
-})); // laoding of .env and .env.local will not be affected by config
 ```
